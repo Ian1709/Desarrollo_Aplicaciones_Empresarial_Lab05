@@ -108,4 +108,5 @@ públicas de recomendación.
 | `7bb3875` | 8. Carga de datos desde los formularios del panel |
 | `c5b3018` | 9. Grupo `editores` y comparativa de permisos |
 | `5f5e264` | 10. Vista pública de recomendación y pruebas |
-| este | 11. Entregable y capturas |
+| `5e3ade9` | 11. Entregable y capturas del panel |
+| (último) | 12. Publicación en `origin/main` |

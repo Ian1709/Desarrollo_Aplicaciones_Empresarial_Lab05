@@ -7,7 +7,7 @@
 | **Fecha** | 2 de octubre de 2026 |
 | **Tecnología** | Django 5.2.17, Pillow 12.3.0, Python 3.14.3, SQLite |
 | **Repositorio** | https://github.com/Ian1709/Desarrollo_Aplicaciones_Empresarial_Lab05 |
-| **Rama** | `main` |
+| **Rama** | `main` (12 commits, publicado con `git push -u origin main`) |
 
 ---
 
@@ -297,7 +297,8 @@ Quien clone el repositorio los regenera con los dos comandos de arriba.
 | `7bb3875` | 8. Carga de datos desde los formularios del panel |
 | `c5b3018` | 9. Grupo `editores` y comparativa de permisos |
 | `5f5e264` | 10. Vista pública de recomendación, plantillas y 19 pruebas |
-| `HEAD` | 11. Entregable, capturas y evidencia de las capturas |
+| `5e3ade9` | 11. Entregable, README y 13 capturas del panel antes/después |
+| este commit | 12. Publicación en GitHub (`origin/main`) y cierre del entregable |
 
 ---
 
