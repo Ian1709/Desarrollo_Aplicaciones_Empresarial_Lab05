@@ -1,0 +1,55 @@
+{% extends "movies/base.html" %}
+
+{% block title %}{{ pelicula.titulo }}{% endblock %}
+
+{% block content %}
+<h2>{{ pelicula.titulo }} ({{ pelicula.anio }})</h2>
+
+<p class="meta">
+  {% if pelicula.duracion %}{{ pelicula.duracion }} minutos · {% endif %}
+  {% if pelicula.directores.all %}Dirección: {{ pelicula.directores.all|join:", " }}{% endif %}
+</p>
+
+<p class="etiquetas">
+  {% for genero in pelicula.generos.all %}<span class="etiqueta">{{ genero.nombre }}</span>{% endfor %}
+</p>
+
+{% if pelicula.cartel %}
+  <p><img src="{{ pelicula.cartel.url }}" alt="Cartel de {{ pelicula.titulo }}" width="220"></p>
+{% endif %}
+
+{% if pelicula.sinopsis %}<p>{{ pelicula.sinopsis }}</p>{% endif %}
+
+<h2>Valoraciones ({{ pelicula.valoraciones.count }})</h2>
+<table>
+  <tr><th>Crítico</th><th>Puntuación</th><th>Comentario</th></tr>
+  {% for valoracion in pelicula.valoraciones.all %}
+    <tr>
+      <td>{{ valoracion.critico }}</td>
+      <td>{{ valoracion.puntuacion }}/10</td>
+      <td>{{ valoracion.comentario|default:"—" }}</td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="3" class="vacio">Esta película todavía no tiene valoraciones.</td></tr>
+  {% endfor %}
+</table>
+
+<h2>Te puede interesar (mismo{% if genero_principal %} {{ genero_principal.nombre }}{% else %}s género{% endif %})</h2>
+<div class="grid">
+  {% for recomendada in recomendaciones %}
+    <article class="card">
+      <h3><a href="{% url 'movies:movie_detail' recomendada.pk %}">{{ recomendada.titulo }}</a></h3>
+      <p class="meta">{{ recomendada.anio }}</p>
+      <p><span class="media">★ {{ recomendada.media|floatformat:2 }}</span>
+         <span class="meta">({{ recomendada.num_valoraciones }} valoración/es)</span></p>
+      <p class="etiquetas">
+        {% for genero in recomendada.generos.all %}<span class="etiqueta">{{ genero.nombre }}</span>{% endfor %}
+      </p>
+    </article>
+  {% empty %}
+    <p class="vacio">No hay otras películas valoradas del mismo género.</p>
+  {% endfor %}
+</div>
+
+<p><a href="{% url 'movies:movie_list' %}">← Volver al catálogo</a></p>
+{% endblock %}

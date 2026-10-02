@@ -1,0 +1,56 @@
+{% extends "movies/base.html" %}
+
+{% block title %}Catálogo de películas{% endblock %}
+
+{% block content %}
+<h2>Recomendaciones: mejor valoradas de cada género</h2>
+
+<p class="meta">
+  Esta es la parte que el panel de administración no puede resolver por sí solo:
+  el admin mantiene los datos; la vista pública los consulta, los ordena por
+  valoración media y relaciona películas del mismo género.
+</p>
+
+{% for genero, peliculas_del_genero in mejores_por_genero %}
+  <h2>{{ genero.nombre }}</h2>
+  <div class="grid">
+    {% for pelicula in peliculas_del_genero %}
+      <article class="card">
+        <h3><a href="{% url 'movies:movie_detail' pelicula.pk %}">{{ pelicula.titulo }}</a></h3>
+        <p class="meta">{{ pelicula.anio }} · {{ pelicula.duracion }} min</p>
+        <p><span class="media">★ {{ pelicula.media|floatformat:2 }}</span>
+           <span class="meta">({{ pelicula.num_valoraciones }} valoración/es)</span></p>
+      </article>
+    {% endfor %}
+  </div>
+{% empty %}
+  <p class="vacio">No hay películas valoradas todavía.</p>
+{% endfor %}
+
+<h2>Catálogo completo</h2>
+<div class="grid">
+  {% for pelicula in peliculas %}
+    <article class="card">
+      <h3><a href="{% url 'movies:movie_detail' pelicula.pk %}">{{ pelicula.titulo }}</a></h3>
+      <p class="meta">
+        {{ pelicula.anio }}
+        {% if pelicula.duracion %}· {{ pelicula.duracion }} min{% endif %}
+        {% if pelicula.directores.all %}· {{ pelicula.directores.all|join:", " }}{% endif %}
+      </p>
+      <p>
+        {% if pelicula.media %}
+          <span class="media">★ {{ pelicula.media|floatformat:2 }}</span>
+          <span class="meta">({{ pelicula.num_valoraciones }} valoración/es)</span>
+        {% else %}
+          <span class="vacio">sin valoraciones todavía</span>
+        {% endif %}
+      </p>
+      <p class="etiquetas">
+        {% for genero in pelicula.generos.all %}<span class="etiqueta">{{ genero.nombre }}</span>{% endfor %}
+      </p>
+    </article>
+  {% empty %}
+    <p class="vacio">Todavía no hay películas en la base de datos.</p>
+  {% endfor %}
+</div>
+{% endblock %}

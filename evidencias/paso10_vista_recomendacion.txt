@@ -1,0 +1,50 @@
+﻿PASO 10 - VISTA PÚBLICA DE RECOMENDACIÓN
+----------------------------------------------------------------------
+  películas en la base de datos: 10
+  géneros: 4
+
+RECOMENDACIÓN POR GÉNERO (mejores_por_genero)
+----------------------------------------------------------------------
+  Ciencia ficción    -> 2001: Una odisea espacial (9.00), Inception (8.50), Gravity (7.50)
+  Drama              -> La lista de Schindler (10.00), Pulp Fiction (9.50), El resplandor (8.00)
+  Misterio           -> Pulp Fiction (9.50), Inception (8.50), Interest (8.00)
+
+RECOMENDACIONES DESDE LA FICHA DE CADA PELÍCULA (recommender)
+----------------------------------------------------------------------
+  2001: Una odisea espacial [Ciencia ficción]
+      -> Inception (8.50), Gravity (7.50)
+  Django: Unidos por el rencor [Aventura, Drama]
+      -> La lista de Schindler (10.00), Pulp Fiction (9.50), El resplandor (8.00), Gravity (7.50)
+  E.T. el extraterrestre [Aventura, Ciencia ficción]
+      -> 2001: Una odisea espacial (9.00), Inception (8.50), Gravity (7.50)
+  El resplandor [Drama, Misterio]
+      -> La lista de Schindler (10.00), Pulp Fiction (9.50), Inception (8.50), Interest (8.00), Gravity (7.50)
+  Gravity [Ciencia ficción, Drama]
+      -> La lista de Schindler (10.00), Pulp Fiction (9.50), 2001: Una odisea espacial (9.00), Inception (8.50), El resplandor (8.00)
+  Inception [Ciencia ficción, Misterio]
+      -> Pulp Fiction (9.50), 2001: Una odisea espacial (9.00), Interest (8.00), El resplandor (8.00), Gravity (7.50)
+  Interest [Misterio]
+      -> Pulp Fiction (9.50), Inception (8.50), El resplandor (8.00)
+  La lista de Schindler [Drama]
+      -> Pulp Fiction (9.50), El resplandor (8.00), Gravity (7.50)
+  Parque Jurásico [Aventura]
+      -> —
+  Pulp Fiction [Drama, Misterio]
+      -> La lista de Schindler (10.00), Inception (8.50), Interest (8.00), El resplandor (8.00), Gravity (7.50)
+
+PÁGINAS PÚBLICAS QUE RESPONDEN
+----------------------------------------------------------------------
+  Catálogo             /                          -> 200
+  Ficha de Inception   /pelicula/3/               -> 200
+  Ficha inexistente    /pelicula/999999/          -> 404
+
+SQL DE LA RECOMENDACIÓN (consulta generada por Django)
+----------------------------------------------------------------------
+SELECT DISTINCT "movies_movie"."id", "movies_movie"."titulo", "movies_movie"."anio", "movies_movie"."duracion", "movies_movie"."sinopsis", "movies_movie"."cartel", "movies_movie"."fecha_creacion", "movies_movie"."fecha_modificacion", AVG("movies_rating"."puntuacion") AS "media", COUNT(DISTINCT "movies_rating"."id") AS "num_valoraciones" FROM "movies_movie" INNER JOIN "movies_movie_generos" ON ("movies_movie"."id" = "movies_movie_generos"."movie_id") LEFT OUTER JOIN "movies_rating" ON ("movies_movie"."id" = "movies_rating"."pelicula_id") WHERE ("movies_movie_generos"."genre_id" IN (3, 2) AND NOT ("movies_movie"."id" = 3)) GROUP BY "movies_movie"."id", "movies_movie"."titulo", "movies_movie"."anio", "movies_movie"."duracion", "movies_movie"."sinopsis", "movies_movie"."cartel", "movies_movie"."fecha_creacion", "movies_movie"."fecha_modificacion" HAVING COUNT(DISTINCT "movies_rating"."id") > 0 ORDER BY 9 DESC, 10 DESC, "movies_movie"."anio" DESC LIMIT 5
+
+CONCLUSIÓN
+----------------------------------------------------------------------
+  El panel de administración (Pasos 4-9) permite mantener los datos, pero
+  no sabe responder "¿qué me recomiendas?": ordenar por valoración media y
+  relate peliculas del mismo género exige una vista propia (views + urls +
+  plantilla), tal y como se ve en las páginas públicas de arriba.

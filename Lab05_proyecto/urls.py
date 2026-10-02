@@ -7,10 +7,11 @@ escribe en el Paso 10, las rutas de `movies`.
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('movies.urls')),
 ]
 
 if settings.DEBUG:
