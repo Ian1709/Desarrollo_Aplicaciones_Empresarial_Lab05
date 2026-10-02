@@ -1,0 +1,20 @@
+﻿PASO 7 - CAMPOS DE AUDITORÍA EN SOLO LECTURA
+------------------------------------------------------------
+  película de prueba: PELICULA TEMPORAL PARA COMPROBAR SOLO LECTURA (2000) (id=2)
+  fecha_creacion en BD: 2026-10-02 04:38:26.964088+00:00
+  fecha_modificacion en BD: 2026-10-02 04:38:26.964113+00:00
+
+  GET change/ -> 200
+  campos editables del formulario: ['anio', 'cartel', 'directores', 'duracion', 'generos', 'sinopsis', 'titulo']
+  auditoría ausente del formulario (solo lectura): ['fecha_creacion', 'fecha_modificacion']
+  la fecha de creación se sigue mostrando en el HTML: True
+  la fecha de modificación se sigue mostrando en el HTML: True
+
+  POST con fechas falsas -> 200
+  fecha_creacion tras el POST: 2026-10-02 04:38:26.964088+00:00
+  fecha_modificacion tras el POST: 2026-10-02 04:38:27.125172+00:00
+  ¿alguna fecha fue alterada por el formulario?: NO (correcto)
+
+  (la película temporal de la prueba se ha borrado)
+
+  superusuario en la base de datos: admin

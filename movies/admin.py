@@ -64,6 +64,10 @@ class MovieAdmin(admin.ModelAdmin):
     ordering = ('-anio', 'titulo')
     list_per_page = 25
 
+    # Paso 7: los campos de auditoría se muestran pero no se pueden editar
+    # (los gestiona Django con auto_now_add / auto_now).
+    readonly_fields = ('fecha_creacion', 'fecha_modificacion')
+
     @admin.display(description='géneros', ordering='generos__nombre')
     def generos_texto(self, obj):
         return ', '.join(g.nombre for g in obj.generos.all())
