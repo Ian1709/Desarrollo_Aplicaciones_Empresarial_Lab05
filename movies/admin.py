@@ -111,7 +111,6 @@ class PersonAdmin(admin.ModelAdmin):
     list_filter = ('pais',)
     search_fields = ('nombre', 'apellidos')
     ordering = ('apellidos', 'nombre')
-    filter_horizontal = ('peliculas_dirigidas',)
 
     @admin.display(description='nº de películas')
     def num_peliculas(self, obj):

@@ -1,0 +1,22 @@
+﻿Sesión iniciada en /admin/ como "admin"
+
+RESUMEN DE LA CARGA (Paso 8)
+------------------------------------------------------------
+  Géneros: 4
+  Personas: 5
+  Películas: 10
+  Valoraciones: 12
+  Películas con al menos una valoración: 7
+------------------------------------------------------------
+  Gravity (2013) | géneros: Ciencia ficción, Drama | valoraciones: ['8', '7'] | media: 7.50
+  Django: Unidos por el rencor (2012) | géneros: Aventura, Drama | valoraciones: ninguna | media: —
+  Inception (2010) | géneros: Ciencia ficción, Misterio | valoraciones: ['9', '8'] | media: 8.50
+  Interest (1995) | géneros: Misterio | valoraciones: ['9', '8', '7'] | media: 8.00
+  Pulp Fiction (1994) | géneros: Drama, Misterio | valoraciones: ['10', '9'] | media: 9.50
+  La lista de Schindler (1993) | géneros: Drama | valoraciones: ['10'] | media: 10.00
+  Parque Jurásico (1993) | géneros: Aventura | valoraciones: ninguna | media: —
+  E.T. el extraterrestre (1982) | géneros: Aventura, Ciencia ficción | valoraciones: ninguna | media: —
+  El resplandor (1980) | géneros: Drama, Misterio | valoraciones: ['8'] | media: 8.00
+  2001: Una odisea espacial (1968) | géneros: Ciencia ficción | valoraciones: ['9'] | media: 9.00
+
+Los datos se han escrito con los formularios del panel (/admin/).
