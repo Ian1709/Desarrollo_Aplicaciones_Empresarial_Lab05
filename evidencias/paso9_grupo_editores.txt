@@ -1,0 +1,13 @@
+﻿Grupo "editores" con 3 permiso(s):
+  - movie.add_movie (Can add película)
+  - movie.change_movie (Can change película)
+  - movie.view_movie (Can view película)
+  - delete_movie asignado: False (False = el editor NO puede eliminar películas)
+
+Usuario "editor" (actualizado): is_staff=True is_superuser=False grupos=['editores']
+  contraseña: editor123
+
+Permisos efectivos del usuario dentro del panel:
+  movies.add_movie
+  movies.change_movie
+  movies.view_movie

@@ -1,0 +1,103 @@
+﻿PASO 9 - COMPARATIVA SUPERUSUARIO vs USUARIO EDITOR
+==============================================================================
+
+CUENTA: admin  (is_superuser=True, grupos=[])
+------------------------------------------------------------------------------
+  Permisos efectivos:
+    admin.add_logentry
+    admin.change_logentry
+    admin.delete_logentry
+    admin.view_logentry
+    auth.add_group
+    auth.add_permission
+    auth.add_user
+    auth.change_group
+    auth.change_permission
+    auth.change_user
+    auth.delete_group
+    auth.delete_permission
+    auth.delete_user
+    auth.view_group
+    auth.view_permission
+    auth.view_user
+    contenttypes.add_contenttype
+    contenttypes.change_contenttype
+    contenttypes.delete_contenttype
+    contenttypes.view_contenttype
+    movies.add_genre
+    movies.add_movie
+    movies.add_person
+    movies.add_rating
+    movies.change_genre
+    movies.change_movie
+    movies.change_person
+    movies.change_rating
+    movies.delete_genre
+    movies.delete_movie
+    movies.delete_person
+    movies.delete_rating
+    movies.view_genre
+    movies.view_movie
+    movies.view_person
+    movies.view_rating
+    sessions.add_session
+    sessions.change_session
+    sessions.delete_session
+    sessions.view_session
+
+  Pantallas del panel (código HTTP):
+    Géneros                  /admin/movies/genre/             -> 200
+    Personas                 /admin/movies/person/            -> 200
+    Valoraciones             /admin/movies/rating/            -> 200
+    Películas (listado)      /admin/movies/movie/             -> 200
+    Películas (alta)         /admin/movies/movie/add/         -> 200
+
+  Formulario de película /admin/movies/movie/3/change/ -> 200
+  Pantalla de borrado    /admin/movies/movie/3/delete/ -> 200
+  acción "Eliminar seleccionados" en el listado: True
+  casilla de selección de acciones (action_checkbox): True
+  botón "Eliminar" en el formulario de la película: True
+  ¿aparece el bloque de valoraciones (inline)?: True
+  ¿se ven los campos de auditoría en solo lectura?: True
+  Modelos visibles en el índice del panel:
+    Películas     visible=True
+    Géneros       visible=True
+    Personas      visible=True
+    Valoraciones  visible=True
+
+CUENTA: editor  (is_superuser=False, grupos=['editores'])
+------------------------------------------------------------------------------
+  Permisos efectivos:
+    movies.add_movie
+    movies.change_movie
+    movies.view_movie
+
+  Pantallas del panel (código HTTP):
+    Géneros                  /admin/movies/genre/             -> 403
+    Personas                 /admin/movies/person/            -> 403
+    Valoraciones             /admin/movies/rating/            -> 403
+    Películas (listado)      /admin/movies/movie/             -> 200
+    Películas (alta)         /admin/movies/movie/add/         -> 200
+
+  Formulario de película /admin/movies/movie/3/change/ -> 200
+  Pantalla de borrado    /admin/movies/movie/3/delete/ -> 403
+  acción "Eliminar seleccionados" en el listado: False
+  casilla de selección de acciones (action_checkbox): False
+  botón "Eliminar" en el formulario de la película: False
+  ¿aparece el bloque de valoraciones (inline)?: False
+  ¿se ven los campos de auditoría en solo lectura?: True
+  Modelos visibles en el índice del panel:
+    Películas     visible=True
+    Géneros       visible=False
+    Personas      visible=False
+    Valoraciones  visible=False
+
+==============================================================================
+CONCLUSIÓN
+------------------------------------------------------------------------------
+  Con el superusuario se ven los cuatro modelos, se puede añadir, cambiar
+  y eliminar, y aparece el bloque de valoraciones dentro de la película.
+  Con el usuario "editor" desaparecen: los otros tres modelos del índice,
+  la acción/botón de eliminar (HTTP 403) y el inline de valoraciones, porque
+  el grupo "editores" solo tiene add/change/view sobre Movie y ningún
+  permiso sobre Genre, Person ni Rating.
