@@ -1,0 +1,20 @@
+﻿ACCESO AL PANEL
+------------------------------------------------------------
+  login superusuario "admin": OK
+  GET /admin/ -> 200
+
+CUATRO MODELOS REGISTRADOS (Paso 4: sin escribir ninguna vista)
+------------------------------------------------------------
+  Películas     registrado_en_admin=True  operaciones=('add', 'change', 'delete', 'view')
+  Géneros       registrado_en_admin=True  operaciones=('add', 'change', 'delete', 'view')
+  Personas      registrado_en_admin=True  operaciones=('add', 'change', 'delete', 'view')
+  Valoraciones  registrado_en_admin=True  operaciones=('add', 'change', 'delete', 'view')
+
+PANTALLAS DEL PANEL (listado / alta / edición)
+------------------------------------------------------------
+  Películas     /admin/movies/movie/ -> 200   add/ -> 200   change/1/ -> 302
+  Géneros       /admin/movies/genre/ -> 200   add/ -> 200   change/1/ -> 302
+  Personas      /admin/movies/person/ -> 200   add/ -> 200   change/1/ -> 302
+  Valoraciones  /admin/movies/rating/ -> 200   add/ -> 200   change/1/ -> 302
+
+TOTAL DE MODELOS REGISTRADOS: 6
