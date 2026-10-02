@@ -1,0 +1,93 @@
+PASO 11 - CONTENIDO DE LAS CAPTURAS DEL PANEL
+==========================================================================
+Las imagenes estan en ./capturas/. Este listado indica que se ve en cada
+una, comprobado sobre el HTML que sirve cada version del panel:
+  - 8001: proyecto final (admin.py personalizado)
+  - 8002: commit del Paso 4 (registro simple de los cuatro modelos)
+
+01_antes_indice_panel.png
+  servidor / cuenta : antes  superusuario  /admin/   HTTP 200
+  modelos visibles   : ['Géneros', 'Películas', 'Personas', 'Valoraciones']
+
+02_antes_listado_peliculas.png
+  servidor / cuenta : antes  superusuario  /admin/movies/movie/   HTTP 200
+  columnas   : ['__str__']
+  filtros    : []
+  buscador   : False
+  acciones   : ['delete_selected']
+  filas      : 10
+
+03_antes_formulario_pelicula.png
+  servidor / cuenta : antes  superusuario  /admin/movies/movie/3/change/   HTTP 200
+  inline valoraciones: False
+  fecha_creacion     : visible=False  como input editable=False
+  enlace eliminar    : True
+
+04_despues_indice_panel.png
+  servidor / cuenta : final  superusuario  /admin/   HTTP 200
+  modelos visibles   : ['Géneros', 'Películas', 'Personas', 'Valoraciones']
+
+05_despues_listado_peliculas.png
+  servidor / cuenta : final  superusuario  /admin/movies/movie/   HTTP 200
+  columnas   : ['anio', 'directores_texto', 'generos_texto', 'num_valoraciones', 'titulo', 'valoracion_media']
+  filtros    : ['decada', 'generos__id__exact', 'generos__isnull']
+  buscador   : True
+  acciones   : ['delete_selected']
+  filas      : 10
+
+06_despues_filtro_genero_misterio.png
+  servidor / cuenta : final  superusuario  /admin/movies/movie/?generos__id__exact=2   HTTP 200
+  columnas   : ['anio', 'directores_texto', 'generos_texto', 'num_valoraciones', 'titulo', 'valoracion_media']
+  filtros    : ['decada', 'generos__id__exact', 'generos__isnull']
+  buscador   : True
+  acciones   : ['delete_selected']
+  filas      : 4
+
+07_despues_busqueda_titulo.png
+  servidor / cuenta : final  superusuario  /admin/movies/movie/?q=pulp   HTTP 200
+  columnas   : ['anio', 'directores_texto', 'generos_texto', 'num_valoraciones', 'titulo', 'valoracion_media']
+  filtros    : ['decada', 'generos__id__exact', 'generos__isnull']
+  buscador   : True
+  acciones   : ['delete_selected']
+  filas      : 1
+
+08_despues_formulario_con_inline.png
+  servidor / cuenta : final  superusuario  /admin/movies/movie/3/change/   HTTP 200
+  inline valoraciones: True
+  fecha_creacion     : visible=True  como input editable=False
+  enlace eliminar    : True
+
+09_editor_indice_panel.png
+  servidor / cuenta : final  editor        /admin/   HTTP 200
+  modelos visibles   : ['Películas']
+
+10_editor_listado_peliculas.png
+  servidor / cuenta : final  editor        /admin/movies/movie/   HTTP 200
+  columnas   : ['anio', 'directores_texto', 'generos_texto', 'num_valoraciones', 'titulo', 'valoracion_media']
+  filtros    : ['decada', 'generos__id__exact', 'generos__isnull']
+  buscador   : True
+  acciones   : []
+  filas      : 0
+
+11_editor_formulario_pelicula.png
+  servidor / cuenta : final  editor        /admin/movies/movie/3/change/   HTTP 200
+  inline valoraciones: False
+  fecha_creacion     : visible=True  como input editable=False
+  enlace eliminar    : False
+
+12_publico_catalogo_recomendaciones.png
+  servidor / cuenta : final  anonimo       /   HTTP 200
+  tarjetas de pelicula: 19
+  muestra recomendaciones por genero : True
+
+13_publico_ficha_con_recomendacion.png
+  servidor / cuenta : final  anonimo       /pelicula/3/   HTTP 200
+  tarjetas de pelicula: 5
+  muestra recomendaciones por genero : True
+
+COMPARATIVA DIRECTA (mismo listado de peliculas, dos versiones del panel)
+--------------------------------------------------------------------------
+  columnas  antes -> despues : ['__str__']  ->  ['anio', 'directores_texto', 'generos_texto', 'num_valoraciones', 'titulo', 'valoracion_media']
+  filtros   antes -> despues : []  ->  ['decada', 'generos__id__exact', 'generos__isnull']
+  buscador  antes -> despues : False  ->  True
+  editor: acciones disponibles ninguna; filas con casilla de seleccion: 0
