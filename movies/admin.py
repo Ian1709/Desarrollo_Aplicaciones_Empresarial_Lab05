@@ -29,10 +29,27 @@ class FiltroAnio(SimpleListFilter):
         return queryset.filter(anio__gte=int(valor), anio__lte=int(valor) + 9)
 
 
+class RatingInline(admin.TabularInline):
+    """Paso 6: bloque de líneas con las valoraciones dentro del formulario de la película.
+
+    Permite darlas de alta y editarlas sin salir del registro de la película
+    (una película, varias valoraciones: FK `Rating.pelicula`).
+    """
+
+    model = Rating
+    extra = 1
+    fields = ('critico', 'puntuacion', 'comentario')
+    ordering = ('-puntuacion',)
+    verbose_name = 'valoración'
+    verbose_name_plural = 'valoraciones (alta y edición en la misma pantalla)'
+    show_change_link = True
+
+
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
     """Columnas útiles, filtro por género y por año, y búsqueda por título y nombre."""
 
+    inlines = [RatingInline]
     list_display = (
         'titulo',
         'anio',

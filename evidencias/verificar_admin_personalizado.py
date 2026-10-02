@@ -22,6 +22,7 @@ django.setup()
 from django.contrib import admin as dj_admin  # noqa: E402
 from django.test import Client  # noqa: E402
 from django.test.utils import setup_test_environment  # noqa: E402
+from movies.admin import MovieAdmin  # noqa: E402
 from movies.models import Genre, Movie, Person, Rating  # noqa: E402
 
 # Necesario para que el cliente de pruebas capture el contexto de las plantillas
@@ -104,12 +105,23 @@ def main():
         forms = formset.formset
         print(f'  película abierta: {pelicula}')
         print(f'  inline: {formset.opts.__class__.__name__} -> modelo {formset.opts.model.__name__}')
-        print(f'  campos del inline: {[f for f in formset.form.fields if f != "id"]}')
+        print(f'  campos por línea: {list(forms.forms[0].fields)}')
         print(f'  líneas iniciales (valoraciones existentes): {forms.initial_form_count()}')
-        print(f'  líneas extra para añadir sin salir del registro: {forms.total_form_count() - forms.initial_form_count()}')
+        print(
+            '  líneas extra para añadir sin salir del registro: '
+            f'{forms.total_form_count() - forms.initial_form_count()}'
+        )
         print(f'  valoraciones guardadas en BD: {pelicula.valoraciones.count()}')
     else:
-        print('  (aún no hay películas: se crean en el Paso 8)')
+        resp = cliente.get('/admin/movies/movie/add/')
+        forms = resp.context['inline_admin_formsets'][0].formset
+        print(f'  GET /admin/movies/movie/add/ -> {resp.status_code}')
+        print(
+            '  inline declarado: '
+            f'{MovieAdmin.inlines[0].__name__} -> modelo {MovieAdmin.inlines[0].model.__name__}'
+        )
+        print(f'  líneas disponibles para escribir: {forms.total_form_count()}')
+        print(f'  campos por línea: {list(forms.forms[0].fields)}')
 
     print()
     print('PASO 7 - CAMPOS DE AUDITORÍA EN SOLO LECTURA')
