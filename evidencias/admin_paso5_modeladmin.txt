@@ -1,0 +1,55 @@
+﻿PASO 5 - CONFIGURACION DECLARADA EN admin.py
+------------------------------------------------------------
+  Películas (MovieAdmin)
+    list_display : ['titulo', 'anio', 'generos_texto', 'directores_texto', 'num_valoraciones', 'valoracion_media']
+    list_filter  : ['generos', 'FiltroAnio']
+    search_fields: ['titulo', 'directores__nombre', 'directores__apellidos']
+  Géneros (GenreAdmin)
+    list_display : ['nombre', 'descripcion', 'num_peliculas']
+    list_filter  : []
+    search_fields: ['nombre']
+  Personas (PersonAdmin)
+    list_display : ['nombre', 'apellidos', 'pais', 'fecha_nacimiento', 'num_peliculas']
+    list_filter  : ['pais']
+    search_fields: ['nombre', 'apellidos']
+  Valoraciones (RatingAdmin)
+    list_display : ['pelicula', 'critico', 'puntuacion', 'fecha_creacion']
+    list_filter  : ['puntuacion', 'fecha_creacion']
+    search_fields: ['critico', 'pelicula__titulo']
+
+PASO 5 - COLUMNAS Y FILTOS QUE PINTA EL PANEL
+------------------------------------------------------------
+  Películas  (HTTP 200)
+    list_display : ['action_checkbox', 'titulo', 'anio', 'generos_texto', 'directores_texto', 'num_valoraciones', 'valoracion_media']
+    filtros barra: ['década de estreno']
+    search_fields: ['titulo', 'directores__nombre', 'directores__apellidos']
+
+  Géneros  (HTTP 200)
+    list_display : ['action_checkbox', 'nombre', 'descripcion', 'num_peliculas']
+    filtros barra: []
+    search_fields: ['nombre']
+
+  Personas  (HTTP 200)
+    list_display : ['action_checkbox', 'nombre', 'apellidos', 'pais', 'fecha_nacimiento', 'num_peliculas']
+    filtros barra: ['país']
+    search_fields: ['nombre', 'apellidos']
+
+  Valoraciones  (HTTP 200)
+    list_display : ['action_checkbox', 'pelicula', 'critico', 'puntuacion', 'fecha_creacion']
+    filtros barra: ['puntuación (1-10)', 'fecha de creación']
+    search_fields: ['critico', 'pelicula__titulo']
+
+BUSQUEDA Y FILTROS DESDE EL PANEL (parámetros de la URL)
+------------------------------------------------------------
+  ?q=matrix -> 0 película(s)
+  ?q=godfather -> 0 película(s)
+  ?decada=2020 -> 0 película(s)
+  ?decada=2010 -> 0 película(s)
+  ?decada=2000 -> 0 película(s)
+
+PASO 6 - INLINE DE VALORACIONES EN EL FORMULARIO DE LA PELÍCULA
+------------------------------------------------------------
+  (aún no hay películas: se crean en el Paso 8)
+
+PASO 7 - CAMPOS DE AUDITORÍA EN SOLO LECTURA
+------------------------------------------------------------
