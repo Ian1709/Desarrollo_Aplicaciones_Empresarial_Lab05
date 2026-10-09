@@ -1,0 +1,31 @@
+{% comment %}
+Tarjeta reutilizable de una noticia. Se incluye desde la portada y desde el
+listado por categoría con {% include "news/_article_card.html" with article=... %}.
+{% endcomment %}
+<article class="tarjeta">
+  {% if article.featured_image %}
+    <a class="tarjeta-imagen" href="/noticia/{{ article.pk }}/">
+      <img src="{{ article.featured_image.url }}" alt="Imagen destacada de {{ article.title }}">
+    </a>
+  {% else %}
+    <span class="tarjeta-sin-imagen">Sin imagen</span>
+  {% endif %}
+
+  <div class="tarjeta-cuerpo">
+    <p class="etiquetas">
+      {% for category in article.categories.all %}
+        <span class="etiqueta">{{ category.name }}</span>
+      {% endfor %}
+    </p>
+
+    <h3 class="tarjeta-titulo">
+      <a href="/noticia/{{ article.pk }}/">{{ article.title }}</a>
+    </h3>
+
+    <p class="tarjeta-resumen">{{ article.summary|truncatewords:20 }}</p>
+
+    <p class="tarjeta-meta">
+      {{ article.published_at|date:"j \d\e F \d\e Y" }} · {{ article.author.name }}
+    </p>
+  </div>
+</article>
