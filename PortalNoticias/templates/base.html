@@ -7,7 +7,7 @@
 </head>
 <body>
   <header class="cabecera">
-    <a class="marca" href="/">Portal de Noticias</a>
+    <a class="marca" href="{% url 'news:index' %}">Portal de Noticias</a>
     <nav class="menu">
       {% block menu %}{% endblock %}
     </nav>

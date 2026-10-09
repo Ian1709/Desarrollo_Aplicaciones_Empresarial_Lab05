@@ -4,7 +4,7 @@ listado por categoría con {% include "news/_article_card.html" with article=...
 {% endcomment %}
 <article class="tarjeta">
   {% if article.featured_image %}
-    <a class="tarjeta-imagen" href="/noticia/{{ article.pk }}/">
+    <a class="tarjeta-imagen" href="{% url 'news:article_detail' article.pk %}">
       <img src="{{ article.featured_image.url }}" alt="Imagen destacada de {{ article.title }}">
     </a>
   {% else %}
@@ -19,7 +19,7 @@ listado por categoría con {% include "news/_article_card.html" with article=...
     </p>
 
     <h3 class="tarjeta-titulo">
-      <a href="/noticia/{{ article.pk }}/">{{ article.title }}</a>
+      <a href="{% url 'news:article_detail' article.pk %}">{{ article.title }}</a>
     </h3>
 
     <p class="tarjeta-resumen">{{ article.summary|truncatewords:20 }}</p>
