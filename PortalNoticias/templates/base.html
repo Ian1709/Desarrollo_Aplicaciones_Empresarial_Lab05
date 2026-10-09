@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Portal de Noticias{% endblock %}</title>
+</head>
+<body>
+  <header class="cabecera">
+    <a class="marca" href="/">Portal de Noticias</a>
+    <nav class="menu">
+      {% block menu %}{% endblock %}
+    </nav>
+  </header>
+
+  <main class="contenedor">
+    <section class="contenido">
+      {% block content %}{% endblock %}
+    </section>
+
+    <aside class="barra-lateral">
+      <h2>Sobre el portal</h2>
+      {% block sidebar %}
+        <p>Noticias de actualidad con sus categorías, autores y fechas de publicación.</p>
+      {% endblock %}
+    </aside>
+  </main>
+
+  <footer class="pie">
+    <p>Portal de Noticias · Ejemplo docente de Django</p>
+  </footer>
+</body>
+</html>
