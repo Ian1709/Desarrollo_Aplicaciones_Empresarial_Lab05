@@ -1,0 +1,67 @@
+﻿python.exe : Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+En línea: 1 Carácter: 263
++ ... ng=[Text.Encoding]::UTF8; & $py manage.py test news -v 2 2>&1 | Out-F ...
++                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Creating test d...che=shared')...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Found 17 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: messages, staticfiles
+  Apply all migrations: admin, auth, contenttypes, news, sessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying news.0001_initial... OK
+test_el_listado_de_noticias_tiene_filtros_y_buscador 
+(news.tests.AdminTests.test_el_listado_de_noticias_tiene_filtros_y_buscador) ... ok
+test_los_tres_modelos_estan_registrados (news.tests.AdminTests.test_los_tres_modelos_estan_registrados) ... ok
+test_el_cuerpo_se_muestra_escapado (news.tests.EscapadoAutomaticoTests.test_el_cuerpo_se_muestra_escapado) ... ok
+test_el_titulo_se_muestra_escapado (news.tests.EscapadoAutomaticoTests.test_el_titulo_se_muestra_escapado) ... ok
+test_la_etiqueta_no_se_interpreta_salvo_que_se_marque_como_segura 
+(news.tests.EscapadoAutomaticoTests.test_la_etiqueta_no_se_interpreta_salvo_que_se_marque_como_segura) ... ok
+test_get_absolute_url_apunta_al_detalle (news.tests.ModelosTests.test_get_absolute_url_apunta_al_detalle) ... ok
+test_los_slug_se_generan_solos (news.tests.ModelosTests.test_los_slug_se_generan_solos) ... ok
+test_no_se_puede_borrar_un_autor_con_noticias (news.tests.ModelosTests.test_no_se_puede_borrar_un_autor_con_noticias) 
+... ok
+test_orden_por_fecha_de_publicacion_descendente 
+(news.tests.ModelosTests.test_orden_por_fecha_de_publicacion_descendente) ... ok
+test_relacion_muchos_a_muchos_con_categorias (news.tests.ModelosTests.test_relacion_muchos_a_muchos_con_categorias) 
+... ok
+test_str_de_los_tres_modelos (news.tests.ModelosTests.test_str_de_los_tres_modelos) ... ok
+test_el_detalle_muestra_autor_y_categorias (news.tests.VistasTests.test_el_detalle_muestra_autor_y_categorias) ... ok
+test_el_listado_por_categoria_reutiliza_la_tarjeta 
+(news.tests.VistasTests.test_el_listado_por_categoria_reutiliza_la_tarjeta) ... ok
+test_la_portada_responde_y_muestra_la_noticia (news.tests.VistasTests.test_la_portada_responde_y_muestra_la_noticia) 
+... ok
+test_los_enlaces_se_construyen_con_url (news.tests.VistasTests.test_los_enlaces_se_construyen_con_url) ... ok
+test_una_categoria_inexistente_devuelve_404 (news.tests.VistasTests.test_una_categoria_inexistente_devuelve_404) ... ok
+test_una_noticia_inexistente_devuelve_404 (news.tests.VistasTests.test_una_noticia_inexistente_devuelve_404) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 3.443s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+  Applying sessions.0001_initial... OK
+System check identified no issues (0 silenced).

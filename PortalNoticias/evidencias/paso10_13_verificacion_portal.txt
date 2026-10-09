@@ -1,0 +1,27 @@
+﻿VERIFICACIÓN DEL PORTAL DE NOTICIAS
+========================================================================
+Servidor: http://127.0.0.1:8020
+
+Página                      Ruta                            HTTP  Tipo
+------------------------------------------------------------------------
+Portada                     /                               200   text/html; charset=utf-8 (contiene lo esperado)
+Detalle de noticia          /noticia/2/                     200   text/html; charset=utf-8 (contiene lo esperado)
+Listado por categoría       /categoria/cultura/             200   text/html; charset=utf-8 (contiene lo esperado)
+Hoja de estilos             /static/css/portal.css          200   text/css (contiene lo esperado)
+Imagen destacada (media)    /media/articulos/noticia-1.png  200   image/png
+Panel: noticias             /admin/news/article/            200   text/html; charset=utf-8
+Panel: categorías           /admin/news/category/           200   text/html; charset=utf-8
+Panel: autores              /admin/news/author/             200   text/html; charset=utf-8
+
+CONTENIDO DEL PORTAL (Paso 6: for/empty, filtros date y truncate)
+------------------------------------------------------------------------
+  destacada presente      : True
+  tarjetas de noticia     : 7
+  caso empty en la vista  : False
+  fechas formateadas      : ['9 de octubre de 2026', '9 de octubre de 2026', '9 de octubre de 2026']
+  enlaces a noticias      : True
+
+PASO 12: ESCAPADO EN EL DETALLE DE LA NOTICIA CON HTML
+------------------------------------------------------------------------
+  aparece &lt;script&gt;  : True
+  aparece <script> real   : False
