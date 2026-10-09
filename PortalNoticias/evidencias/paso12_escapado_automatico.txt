@@ -1,0 +1,14 @@
+﻿Noticia guardada con id=8 (HTTP 200)
+
+Cuerpo guardado en la base de datos:
+  Este párrafo lo escribió el redactor con una etiqueta <b>en negrita</b> y un aviso <script>alert("xss")</script> dentro del texto.
+
+HTML que devuelve la página de detalle:
+<div class="noticia-cuerpo">
+      <p>Este párrafo lo escribió el redactor con una etiqueta &lt;b&gt;en negrita&lt;/b&gt; y un aviso &lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt; dentro del texto.</p>
+    </div>
+
+El resumen en la portada:
+<p class="tarjeta-resumen">Resumen con &lt;b&gt;negrita&lt;/b&gt; y &lt;i&gt;cursiva&lt;/i&gt; escritas a mano.</p>
+
+El navegador NO ejecuta el <script>: la plantilla muestra el texto escapado (&lt;script&gt;...) porque el autoescapado de Django está activo.
