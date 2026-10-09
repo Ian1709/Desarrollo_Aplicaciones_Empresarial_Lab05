@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Portada · Portal de Noticias{% endblock %}
+
+{% block menu %}
+  {% for category in categories %}
+    <a href="/categoria/{{ category.slug }}/">{{ category.name }}</a>
+  {% endfor %}
+{% endblock %}
+
+{% block content %}
+  <h1>Últimas noticias</h1>
+
+  {% if destacada %}
+    <article class="destacada">
+      <h2><a href="/noticia/{{ destacada.pk }}/">{{ destacada.title }}</a></h2>
+      <p class="meta">
+        {{ destacada.published_at|date:"l, j \d\e F \d\e Y" }} · {{ destacada.author.name }}
+      </p>
+      <p>{{ destacada.summary|truncatewords:40 }}</p>
+    </article>
+  {% endif %}
+
+  <div class="listado">
+    {% for article in articles %}
+      {% include "news/_article_card.html" with article=article %}
+    {% empty %}
+      <p class="vacio">No hay noticias publicadas todavía.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block sidebar %}
+  <h2>Categorías</h2>
+  <ul class="lista-categorias">
+    {% for category in categories %}
+      <li>
+        <a href="/categoria/{{ category.slug }}/">{{ category.name }}</a>
+        <span class="cuenta">{{ category.articles.count }}</span>
+      </li>
+    {% empty %}
+      <li>Todavía no hay categorías.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
