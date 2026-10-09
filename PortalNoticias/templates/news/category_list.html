@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category.name }} · Portal de Noticias{% endblock %}
+
+{% block menu %}
+  {% for item in categories %}
+    <a href="/categoria/{{ item.slug }}/"
+       {% if item.pk == category.pk %}class="activo"{% endif %}>{{ item.name }}</a>
+  {% endfor %}
+{% endblock %}
+
+{% block content %}
+  <h1>{{ category.name }}</h1>
+  {% if category.description %}
+    <p class="meta">{{ category.description }}</p>
+  {% endif %}
+
+  <p class="meta">{{ articles.count }} noticia{{ articles.count|pluralize }} en esta categoría.</p>
+
+  <div class="listado">
+    {% for article in articles %}
+      {% include "news/_article_card.html" with article=article %}
+    {% empty %}
+      <p class="vacio">Todavía no hay noticias en esta categoría.</p>
+    {% endfor %}
+  </div>
+
+  <p><a href="/">← Volver a la portada</a></p>
+{% endblock %}
+
+{% block sidebar %}
+  <h2>Otras categorías</h2>
+  <ul class="lista-categorias">
+    {% for item in categories %}
+      <li>
+        <a href="/categoria/{{ item.slug }}/">{{ item.name }}</a>
+        <span class="cuenta">{{ item.articles.count }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
