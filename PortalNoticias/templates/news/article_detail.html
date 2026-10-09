@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} · Portal de Noticias{% endblock %}
+
+{% block content %}
+  <article class="noticia">
+    <header class="noticia-cabecera">
+      <p class="etiquetas">
+        {% for category in article.categories.all %}
+          <span class="etiqueta">{{ category.name }}</span>
+        {% endfor %}
+      </p>
+
+      <h1>{{ article.title }}</h1>
+
+      <p class="meta">
+        Por <strong>{{ article.author.name }}</strong> ·
+        {{ article.published_at|date:"j \d\e F \d\e Y \a \l\a\s H:i" }}
+      </p>
+    </header>
+
+    {% if article.featured_image %}
+      <figure class="noticia-imagen">
+        <img src="{{ article.featured_image.url }}" alt="Imagen destacada de {{ article.title }}">
+        <figcaption>{{ article.title }}</figcaption>
+      </figure>
+    {% endif %}
+
+    <div class="noticia-entradilla">
+      <p>{{ article.summary }}</p>
+    </div>
+
+    <div class="noticia-cuerpo">
+      {{ article.body|linebreaks }}
+    </div>
+
+    <footer class="noticia-autor">
+      <h2>Sobre el autor</h2>
+      <div class="autor">
+        {% if article.author.photo %}
+          <img class="autor-foto" src="{{ article.author.photo.url }}" alt="Foto de {{ article.author.name }}">
+        {% endif %}
+        <div>
+          <p class="autor-nombre">{{ article.author.name }}</p>
+          {% if article.author.bio %}<p class="autor-bio">{{ article.author.bio }}</p>{% endif %}
+          {% if article.author.email %}<p class="meta">{{ article.author.email }}</p>{% endif %}
+        </div>
+      </div>
+    </footer>
+  </article>
+
+  <p><a href="/">← Volver a la portada</a></p>
+{% endblock %}
+
+{% block sidebar %}
+  <h2>Categorías de esta noticia</h2>
+  <ul class="lista-categorias">
+    {% for category in article.categories.all %}
+      <li><a href="/categoria/{{ category.slug }}/">{{ category.name }}</a></li>
+    {% empty %}
+      <li>Sin categorías.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

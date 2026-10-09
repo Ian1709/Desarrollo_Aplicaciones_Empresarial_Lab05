@@ -12,3 +12,11 @@ def index(request):
         'categories': Category.objects.all(),
     }
     return render(request, 'news/index.html', context)
+
+
+def article_detail(request, pk):
+    """Detalle de una noticia: imagen destacada, autor y categorías."""
+    article = get_object_or_404(
+        Article.objects.select_related('author').prefetch_related('categories'), pk=pk
+    )
+    return render(request, 'news/article_detail.html', {'article': article})
